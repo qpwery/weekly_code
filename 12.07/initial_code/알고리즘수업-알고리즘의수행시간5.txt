@@ -1,0 +1,15 @@
+import java.util.Scanner;
+
+public class Main{
+	// step1: n(1<=n<=500,000)
+	// step2: 출력 고정값. 알고리즘 필요 X.
+	// step3: n==500,000(최악인 경우) && 시간 복잡도 O(N^3): 1초이상 걸림 
+	// 연산 횟수: int 범위 넘음, int -> long
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		long n = scanner.nextInt();
+		
+		System.out.println(n*n*n);
+		System.out.println(3);
+	}
+}

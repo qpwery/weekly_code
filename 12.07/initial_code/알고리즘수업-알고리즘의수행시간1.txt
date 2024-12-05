@@ -1,0 +1,14 @@
+import java.util.Scanner;
+
+public class algorithm1 {
+	// step1: n(1<=n<=500,000)
+	// step2: 출력 고정값. 알고리즘 필요 X.
+	// step3: n==500,000인 경우(최악인 경우) 시간 복잡도 O(1) / 연산 횟수: 1번
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		int n = scanner.nextInt();
+		
+		System.out.println(1);
+		System.out.println(0);
+	}
+}
