@@ -1,0 +1,35 @@
+import java.util.Scanner;
+
+public class Dividesum{
+	static void solution(int N) { // step5, 6: 매개변수
+		int 생성자 = 0;
+		
+		for(int 생성자후보=0; 생성자후보<N; 생성자후보++) {
+			int 생성자후보_복사값 = 생성자후보;
+			int 자릿수합 = 0;
+			
+			while(생성자후보_복사값 != 0) {
+				자릿수합 += 생성자후보_복사값 % 10;
+				생성자후보_복사값 /= 10;
+			}
+			
+			if(자릿수합 + 생성자후보 == N) {
+				생성자 = 생성자후보;
+				break;
+			}
+		}
+		System.out.println(생성자);
+		return;
+	}
+	
+	public static void main(String[] args) {
+		// step1: N(1 ≤ N ≤ 1,000,000), M(N의 생성자)
+		// step2: Brute Force 적용
+		// step3: 시간복잡도 (O(N) && 데이터 입력 크기: 1,000,000 (최악의 경우)) ==> Brute Force 가능
+		Scanner in = new Scanner(System.in);
+		int N = in.nextInt();
+		
+		// step4: 핵심 부분 함수화
+		solution(N);
+	}
+}

@@ -1,0 +1,50 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+import java.io.IOException;
+
+public class Blackjack {
+	public static void blackjack(int N, int M, int[] arr) { // step5 (리팩토링)
+		// step6
+		int max = -1; // 전역 -> 지역 (리팩토링)
+		for(int first=0; first<=N-3; first++) { // i -> first 변수명 변경 (리팩토링)
+			
+			for(int second=first+1; second<=N-2; second++) { 
+				
+				for(int third=second+1; third<=N-1; third++) {
+					
+					int sum = arr[first] + arr[second] + arr[third]; // 이 줄 추가함 (리팩토링)
+					
+					if(M == sum) { // base case, (리팩토링)
+						System.out.println(M);
+						return;
+					}
+					
+					if((max < sum) && (M > sum))
+						max = arr[first]+arr[second]+arr[third];
+				}
+			}
+		}
+		System.out.println(max);
+		return;	
+	}
+	
+	// step1: N(3<=N<=100), M(10<=M<=300,000), 3장의 카드, 각 카드의 수는 100,000 넘지 않는 양의 정수.
+	// step2: Brute Force 알고리즘 사용
+	// step3: 최악의 경우 N == 100: 시간복잡도 O(N세제곱) && 데이터 입력 크기 100: 1초이상 안 걸림.
+	public static void main(String[] args) throws IOException{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		
+		int N = Integer.parseInt(st.nextToken()); // 전역 -> 지역변수 변경 (리팩토링)
+		int M = Integer.parseInt(st.nextToken()); // 전역 -> 지역변수 변경 (리팩토링)
+		
+		st = new StringTokenizer(br.readLine());
+		
+		int[] arr = new int[N]; // 전역 -> 지역 변경 (리팩토링)
+		for(int i=0; i<N; i++)	
+			arr[i] = Integer.parseInt(st.nextToken());
+		
+		blackjack(N, M, arr); // step4, (리팩토링)
+	}
+}
