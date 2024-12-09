@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+public class Main{
+    // step1: 킹 1개, 퀸 1개, 룩 2개, 비숍 2개, 나이트 2개, 폰 8개 (총 16개) -> original_arr(정답배열)
+    //        입력) 킹, 퀸, 룩, 비숍, 나이트, 폰의 개수 주어짐. 각각의 값은 0보다 크거나 같고 10보다 작거나 같은 정수. -> input_arr(입력배열)
+    // step2: 배열 사용(정답배열과 입력배열 비교 후 두 값 차이 구해서 출력)
+    // step3: 최악의 경우, O(1) && 데이터 입력 크기 6 (항상 6으로 고정) --> 배열 사용 가능.
+    public static void main(String[] args){
+        int[] 정답배열 = {1, 1, 2, 2, 2, 8};
+        int[] 입력배열 = new int[6];
+
+        Scanner scanner = new Scanner(System.in);
+        for(int i=0; i<6; i++)
+        {
+            입력배열[i] = scanner.nextInt();
+
+            if(정답배열[i] == 입력배열[i]) System.out.print(0);
+            else if (정답배열[i] > 입력배열[i]) System.out.print(정답배열[i] - 입력배열[i]);
+            else if (정답배열[i] < 입력배열[i]) System.out.print((입력배열[i] - 정답배열[i]) * -1);
+
+            if(i != 5) System.out.print(" ");
+        }
+
+    }
+}
