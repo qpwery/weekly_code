@@ -1,0 +1,23 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class Main{
+    // step1: 입력) A(올라감), B(미끄러짐), V(목표) , 1 <= B < A <= V <= 1,000,000,000
+    // step2: 수식 이용 (시간초과 이후 시간 줄일 방법 생각 안 나서 블로그 참고함)
+    // step3: 최악의 경우 O(N) && 데이터 입력 크기 1,000,000,000 -> 0.25 이상 걸림
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+        int 올라감 = Integer.parseInt(st.nextToken());
+        int 내려감 = Integer.parseInt(st.nextToken());
+        int 목표 = Integer.parseInt(st.nextToken());
+
+        int day = (목표 - 내려감) / (올라감 - 내려감);
+        if((목표 - 내려감) % (올라감 - 내려감) != 0)  day++;
+
+        System.out.println(day);
+    }
+}
