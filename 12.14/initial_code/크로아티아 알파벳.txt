@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+public class Main{
+    static void solution(String 단어, String[] 크로아티아_단어){
+
+        for(int i=0; i<크로아티아_단어.length; i++)
+        {
+            if(단어.contains(크로아티아_단어[i])){
+                // try1: 단어.replace(크로아티아_단어[i], " "); -> 단어 = 단어.replace(" ", ""); -> cnt += 단어.length();
+                //       입력) c=c=, 출력) 1 (정상 출력은 2) --> try1 코드는 중복된 단어 처리할 수 없음.
+                // try2: (블로그 참고함) 공백으로 대체하지 말고, "!"으로 대체하면 중복된 단어를 처리할 수 있음. (대체할 문자는 특수문자로. 알파벳은 안 됨.)
+                단어 = 단어.replace(크로아티아_단어[i], "!");
+            }
+        }
+        System.out.println(단어.length());
+    }
+
+    // step1: 크로아티아 단어
+    // step2: if문, Arraylist, .. 시도하다가 블로그 조금 참고하여 구현함. (참고한 내용: String 배열에 크로아티아 단어 저장)
+    // step3: 최악의 경우 O(N) && 데이터 입력 크기 100 -> 시간초과 X
+    public static void main(String[] args){
+        Scanner scanner = new Scanner(System.in);
+        String 단어 = scanner.next();
+
+        String[] 크로아티아_단어 = {"c=", "c-", "dz=", "d-", "lj", "nj", "s=", "z="};
+
+        solution(단어, 크로아티아_단어);
+    }
+}
