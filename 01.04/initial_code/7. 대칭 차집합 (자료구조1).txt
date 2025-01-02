@@ -1,0 +1,84 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.StringTokenizer;
+
+public class Main{
+    static void solution(int A, int B, int[] A_num, int[] B_num){
+        Arrays.sort(A_num);
+        Arrays.sort(B_num);
+
+        int cnt = 0;
+
+        // 1. A - B
+        boolean[] AB = new boolean[A];
+
+        for(int i=0; i<A; i++){
+            int target = A_num[i];
+
+            // 이진탐색
+            int left = 0;
+            int right = B_num.length - 1;
+
+            while(left <= right){
+                int mid = (left+right) / 2;
+
+                if(B_num[mid] == target) {
+                    AB[i] = true;
+                    break;
+                }
+                else if(B_num[mid] < target) left = mid + 1;
+                else right = mid - 1;
+            }
+        }
+        for(int i=0; i<A; i++){
+            if(!AB[i]) cnt++;
+        }
+
+        // 2. B - A
+        boolean[] BA = new boolean[B];
+
+        for(int i=0; i<B; i++){
+            int target = B_num[i];
+
+            // 이진탐색
+            int left = 0;
+            int right = A_num.length - 1;
+
+            while(left <= right){
+                int mid = (left+right) / 2;
+
+                if(A_num[mid] == target) {
+                    BA[i] = true;
+                    break;
+                }
+                else if(A_num[mid] < target) left = mid + 1;
+                else right = mid - 1;
+            }
+        }
+        for(int i=0; i<B; i++){
+            if(!BA[i]) cnt++;
+        }
+
+        System.out.println(cnt);
+    }
+    public static void main(String[] args) throws Exception{
+
+        // step1: A, B (1 <= A, B <= 200,000), 각 원소의 값은 100,000,000 넘지 않음
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        String[] firstline = br.readLine().split(" ");
+        int A = Integer.parseInt(firstline[0]); // 집합 A 원소 개수
+        int B = Integer.parseInt(firstline[1]); // 집합 B 원소 개수
+
+        int[] A_num = new int[A]; // A_num: 집합 A 원소
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        for(int i=0; i<A; i++) A_num[i] = Integer.parseInt(st.nextToken());
+
+        int[] B_num = new int[B]; // B_num: 집합 B 원소
+        st = new StringTokenizer(br.readLine());
+        for(int i=0; i<B; i++) B_num[i] = Integer.parseInt(st.nextToken());
+
+        solution(A, B, A_num, B_num);
+    }
+}
