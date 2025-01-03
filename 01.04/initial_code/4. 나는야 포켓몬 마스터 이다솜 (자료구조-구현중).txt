@@ -1,0 +1,59 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args){
+
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt(); // N: 도감에 수록되어 있는 포켓몬의 개수 ( 1<= N <=100,000 )
+        int M = sc.nextInt(); // M: 내가 맞춰야 하는 문제의 개수 ( 1 <= M <= 100,000 )
+        sc.nextLine(); // 버퍼 비우기 (개행문자 처리)
+
+        String[] names = new String[N]; // 포켓몬 이름 (번호 1번부터 ~)
+        String[] questions = new String[M]; // 맞춰야하는 문제 (알파펫 or 숫자)
+        for(int i=0; i<N; i++)  names[i] = sc.nextLine();
+        for(int i=0; i<M; i++)  questions[i] = sc.nextLine();
+
+        // 출력 결과 이상한 원인: 정렬하고 나서 문자열을 비교하면 출력이 정상적으로 되지 않음
+        // 포켓몬 이름 배열 정렬
+        Arrays.sort(names);
+
+        solution(N, M, names, questions);
+    }
+
+    static void solution(int N, int M, String[] names, String[] questions){
+        for(int i=0; i<M; i++){
+
+            // 문제가 알파벳으로 주어진 경우 -> 출력: 번호 출력
+            if ((questions[i].charAt(0) >= 'A' && questions[i].charAt(0) <= 'Z') ||
+                    (questions[i].charAt(0) >= 'a' && questions[i].charAt(0) <= 'z'))
+            {
+                String target = questions[i];
+
+                int idx = binarySearch(N, M, names, questions, target);
+                System.out.println(idx);
+            }
+
+            // 문제가 숫자로 주어진 경우 -> 출력: 번호에 해당하는 문자
+            else{
+                int number = Integer.parseInt(questions[i]);
+                System.out.println(names[number-1]);
+            }
+        }
+    }
+
+    static int binarySearch(int N, int M, String[] names, String[] questions, String target) {
+        int left = 0;
+        int right = names.length - 1;
+
+        while (left <= right) {
+            int mid = (left + right) / 2;
+
+            if (names[mid].compareTo(target) == 0) return mid;
+            else if (names[mid].compareTo(target) < 0) left = mid + 1;
+            else right = mid - 1;
+        }
+
+        return -1;
+    }
+}
