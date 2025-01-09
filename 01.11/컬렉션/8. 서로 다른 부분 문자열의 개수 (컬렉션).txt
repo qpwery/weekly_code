@@ -1,0 +1,36 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.HashSet;
+
+public class Main{
+
+    static void solution(String s) {
+        int x = s.length(); // 문자열의 길이 (반복 횟수를 결정)
+        int cnt = 0; // 현재 자르는 단어의 길이
+        int output = 0; // 서로 다른 부분 문자열의 총 개수 (출력용)
+
+        // 자를 단어의 길이를 1씩 늘리며(cnt), 문자열 길이에 따라 반복 횟수 줄임(x)
+        while (x > 0) {
+            cnt++; // 자를 문자열의 길이 증가
+            HashSet<String> hashSet = new HashSet<>(); // 현재 길이에 맞는 문자열 저장, Set: 중복 허용 X
+
+            // 문자열 저장과 동시에 자동으로 중복된 문자열 제거됨 (set: 중복 허용 X)
+            for(int i=0; i<x; i++)  hashSet.add(s.substring(i, i + cnt));
+
+            output += hashSet.size(); // 저장된 문자열의 수만큼 더함 (출력용)
+
+            x--; // 다음 반복에서 다룰 문자열 반복 횟수 줄임
+        }
+
+        System.out.println(output);
+    }
+
+    public static void main(String[] args) throws IOException {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String s = br.readLine();
+
+        solution(s);
+    }
+}

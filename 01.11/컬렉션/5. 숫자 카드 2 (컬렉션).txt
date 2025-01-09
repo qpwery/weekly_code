@@ -1,0 +1,38 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.StringTokenizer;
+
+public class Main {
+    // 코드 전체 블로그 참고
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        int N = Integer.parseInt(br.readLine());
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < N; i++) {
+            int key = Integer.parseInt(st.nextToken());
+
+            // 중복 입력된 원소 개수 저장하기 위해 getOrDefault(key, defaultValue) 사용
+            map.put(key, map.getOrDefault(key, 0) + 1); // map에 저장
+        }
+
+        int M = Integer.parseInt(br.readLine());
+
+        StringBuilder sb = new StringBuilder();
+
+        st = new StringTokenizer(br.readLine());
+        for(int i=0; i<M; i++){
+            int key = Integer.parseInt(st.nextToken());
+
+            // 입력받은 key가 map에 존재하는지 확인 후,
+            // 존재하면 그에 해당하는 value 반환. 존재하지 않으면 0 반환.
+            sb.append(map.getOrDefault(key, 0)).append(' ');
+        }
+
+        System.out.println(sb);
+    }
+}

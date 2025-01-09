@@ -1,0 +1,27 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class Main{
+
+    // 전체 코드 블로그 참고
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+
+        HashMap<String, String> arr = new HashMap<String, String>();
+        for(int i=0; i<n; i++){
+            String name = sc.next();
+            String log = sc.next();
+
+            if(arr.containsKey(name)) arr.remove(name); // 최초 입력이 아니면 나간 것
+            else arr.put(name, log); // 최초 입력이면 들어온 것
+        }
+
+        // HashMap의 key들을 ArrayList로 변경 (Collections.sort(), 즉 정렬을 위해서)
+        ArrayList<String> list = new ArrayList<String>(arr.keySet());
+        Collections.sort(list, Collections.reverseOrder()); // 내림차순으로 정렬
+        for(int i=0; i<list.size(); i++) System.out.println(list.get(i));
+    }
+}

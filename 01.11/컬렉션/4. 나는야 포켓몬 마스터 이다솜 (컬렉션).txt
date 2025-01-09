@@ -1,0 +1,57 @@
+import java.io.*;
+import java.util.HashMap;
+import java.util.StringTokenizer;
+
+public class Main{
+    // 코드 전체 블로그 참고
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
+        HashMap<Integer, String> arr_String = new HashMap<>(); // 문자 출력용
+        HashMap<String, Integer> arr_int = new HashMap<>(); // 숫자 출력용
+
+        for(int i=1; i<=N; i++){
+            String 도감 = br.readLine();
+
+            // 출력 용도 다르기에 동일한 값으로 두번 다 넣어야 함
+            arr_String.put(i, 도감); // key: 숫자, value: 문자 -> 문제가 '숫자'인 경우 '문자' 출력하기 위한 배열
+            arr_int.put(도감, i); // key: 문자, value: 숫자 -> 문제가 '문자'인 경우 '숫자' 출력하기 위한 배열
+        }
+
+        for(int i=0; i<M; i++){ // 문제 수 만큼 반복
+            String 문제 = br.readLine(); // 문제 하나씩 처리
+
+            if(isNum(문제))
+            { // 문제가 숫자인 경우 (-> 숫자에 해당하는 문자 출력)
+                bw.write(arr_String.get(Integer.parseInt(문제)) + "\n");
+            }
+            else
+            { // 문제가 문자인 경우 (-> 문자에 해당하는 숫자 출력)
+                bw.write(arr_int.get(문제) + "\n");
+            }
+        }
+
+        br.close();
+        bw.flush();
+        bw.close();
+    }
+
+    static boolean isNum(String 문제){ // 문제가 숫자인지 확인하는 함수
+
+        for(int i=0; i<문제.length(); i++){
+
+            if(!Character.isDigit(문제.charAt(i))) // 숫자가 아닌 경우
+            {
+                return false; // false 반환
+            }
+        }
+
+        return true; // 숫자인 경우, true 반환
+    }
+
+}
